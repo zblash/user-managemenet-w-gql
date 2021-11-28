@@ -13,9 +13,5 @@ const usersQuery = gql`
 `;
 
 export const useGetAllUsers = () => {
-  return useGraphql(usersQuery, {
-    onCompleted: () => {
-      console.log('mamamam', GraphqlLoadingCounter.getCount());
-    },
-  });
+  return useGraphql(usersQuery);
 };

@@ -16,7 +16,7 @@ function HomePage() {
 
   return (
     <>
-      {GraphqlLoadingCounter.getCount() > -1 && (
+      {!loading && !error && (
         <UITableComponent
           columns={[
             {

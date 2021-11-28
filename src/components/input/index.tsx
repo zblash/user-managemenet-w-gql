@@ -1,4 +1,12 @@
 import React, { InputHTMLAttributes } from 'react';
+import styled from 'styled-components';
+
+const StyledInput = styled.input`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+`;
 
 export interface UIInputProps extends InputHTMLAttributes<HTMLInputElement> {
   labelKey?: string;
@@ -13,7 +21,7 @@ const UIInputComponent = React.forwardRef<HTMLInputElement, UIInputProps>(
     return (
       <div>
         {labelKey && <label htmlFor={name}>{labelKey}</label>}
-        <input
+        <StyledInput
           id={name}
           name={name}
           type={type}

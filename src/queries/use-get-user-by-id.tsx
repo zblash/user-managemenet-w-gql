@@ -15,8 +15,5 @@ const userByIdQuery = gql`
 export const useGetUserById = (id: number) => {
   return useGraphql(userByIdQuery, {
     variables: { id },
-    onCompleted: () => {
-      console.log('mamamam', GraphqlLoadingCounter.getCount());
-    },
   });
 };
