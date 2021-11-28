@@ -1,1 +1,9 @@
-{}
+{
+  "common.id": "ID",
+  "common.name": "Name",
+  "common.lastname": "Lastname",
+  "common.phone": "Phone",
+  "common.email": "E-mail",
+  "common.transactions": "Transactions",
+  "common.details": "Details"
+}
