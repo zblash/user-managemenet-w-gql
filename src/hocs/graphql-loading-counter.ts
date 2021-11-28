@@ -14,8 +14,8 @@ export const GraphqlLoadingCounter = (function() {
 
   function decrementCount() {
     loadingCount -= 1;
-    if (loadingCount === 0) {
-      loadingCount = -1;
+    if (loadingCount <= 0) {
+      loadingCount = 0;
     }
   }
 

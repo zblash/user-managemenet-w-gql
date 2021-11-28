@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 const HomePage = React.lazy(() => import('./home').then(module => ({ default: module.HomePage })));
+const EditUserPage = React.lazy(() => import('./edit-user').then(module => ({ default: module.EditUserPage })));
 const Page404 = React.lazy(() => import('./404-component').then(module => ({ default: module.Page404 })));
 
 interface IRoute {
@@ -9,10 +10,12 @@ interface IRoute {
   basePath: string;
   component: React.ComponentClass | React.FunctionComponent;
   disabled?: boolean;
-  isPrivate: boolean;
 }
 
-export const RoutesList: IRoute[] = [{ path: '/', basePath: '/', component: HomePage, isPrivate: true }];
+export const RoutesList: IRoute[] = [
+  { path: '/', basePath: '/', component: HomePage },
+  { path: '/edit-user/:userId', basePath: '/edit-user', component: EditUserPage },
+];
 
 const Routes = React.memo(() => {
   return (

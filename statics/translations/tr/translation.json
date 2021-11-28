@@ -5,5 +5,7 @@
   "common.phone": "Telefon",
   "common.email": "E-mail",
   "common.transactions": "Islemler",
-  "common.details": "Detaylar"
+  "common.details": "Detaylar",
+  "common.date_of_birth": "Dogum Tarihi",
+  "common.user_details": "Kullanici Detaylari"
 }

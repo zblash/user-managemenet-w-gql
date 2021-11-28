@@ -4,7 +4,7 @@ import { GraphqlLoadingCounter } from '@/hocs/graphql-loading-counter';
 import { UITableComponent } from '@/components/table';
 import { useTranslation } from 'react-i18next';
 import { IUser } from '@/helpers/api-models';
-import { UIButtonComponent } from '@/components/button';
+import { UILink } from '@/components/link';
 
 function HomePage() {
   /* HomePage Variables */
@@ -40,10 +40,16 @@ function HomePage() {
               accessor: 'email',
             },
             {
+              Header: t('common.date_of_birth'),
+              accessor: 'date_of_birth',
+            },
+            {
               Header: '',
               accessor: 'transactions',
               customRenderer: (item: IUser) => (
-                <UIButtonComponent type="button">{t('common.details')}</UIButtonComponent>
+                <UILink type="button" to={`/edit-user/${item.id}`}>
+                  {t('common.details')}
+                </UILink>
               ),
             },
           ]}
