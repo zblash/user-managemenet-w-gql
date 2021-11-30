@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { useGetAllUsers } from '@/queries/use-get-all-users';
-import { GraphqlLoadingCounter } from '@/hocs/graphql-loading-counter';
-import { UITableComponent } from '@/components/table';
 import { useTranslation } from 'react-i18next';
+import { useGetAllUsers } from '@/queries/use-get-all-users';
+import { UITableComponent } from '@/components/table';
 import { IUser } from '@/helpers/api-models';
 import { UILink } from '@/components/link';
+import { UIContainerComponent } from '@/components/container';
 
 function HomePage() {
   /* HomePage Variables */
@@ -15,7 +15,7 @@ function HomePage() {
   /* HomePage Lifecycle  */
 
   return (
-    <>
+    <UIContainerComponent>
       {!loading && !error && (
         <UITableComponent
           columns={[
@@ -56,7 +56,7 @@ function HomePage() {
           data={data.users as IUser[]}
         />
       )}
-    </>
+    </UIContainerComponent>
   );
 }
 const PureHomePage = React.memo(HomePage);

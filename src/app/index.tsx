@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { ToastContainer } from 'react-toastify';
-import Routes from '@/pages';
 import { ApolloProvider, createHttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
+import Routes from '@/pages';
 import { LoadingContext } from '@/contexts/loading-context';
+import { UILoaderComponent } from '@/components/loading';
 
 const httpLink = createHttpLink({
   uri: 'https://sunny-gorilla-88.hasura.app/v1/graphql',
@@ -30,7 +31,7 @@ function App() {
           },
         }}
       >
-        {loading && <p>Yukleniyor.....</p>}
+        {loading && <UILoaderComponent />}
         <Routes />
         <ToastContainer />
       </LoadingContext.Provider>
