@@ -12,5 +12,8 @@
   "common.form.submit": "Onayla",
 
   "common.messages.edit.user.success": "Kullanici basarili sekilde guncellendi.",
-  "common.messages.edit.user.error": "Kullanici guncellenirken hata olustu."
+  "common.messages.edit.user.error": "Kullanici guncellenirken hata olustu.",
+
+  "common.messages.create.user.success": "Kullanici basarili sekilde olusturuldu.",
+  "common.messages.create.user.error": "Kullanici olusturulurken hata olustu."
 }

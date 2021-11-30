@@ -12,5 +12,8 @@
   "common.form.submit": "Submit",
 
   "common.messages.edit.user.success": "User has been updated as successful.",
-  "common.messages.edit.user.error": "Error occurred while updating user"
+  "common.messages.edit.user.error": "Error occurred while updating user",
+
+  "common.messages.create.user.success": "New user created successfully.",
+  "common.messages.create.user.error": "Error occurred while creating user."
 }
