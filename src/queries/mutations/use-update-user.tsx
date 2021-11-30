@@ -1,9 +1,7 @@
 import { gql } from '@apollo/client';
-import { GraphqlLoadingCounter } from '@/hocs/graphql-loading-counter';
-import { useGraphql } from '@/hocs/useGraphql';
-import { USER_FRAGMENT } from '@/helpers/api-fragments';
-
-import { useMutation, DocumentNode, QueryHookOptions } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
+import { useGraphqlMutation } from '@/hocs/useGraphql';
+import { useAlert } from '@/hocs/use-alert';
 
 const updateUserMutation = gql`
   mutation updateUserMutation(
@@ -29,9 +27,19 @@ const updateUserMutation = gql`
 `;
 
 export const useUpdateUserMutation = () => {
-  return useMutation(updateUserMutation, {
+  const alert = useAlert();
+  const { t } = useTranslation();
+
+  return useGraphqlMutation(updateUserMutation, {
     onCompleted: () => {
-      console.log('mamamam', GraphqlLoadingCounter.getCount());
+      alert.show(`${t('common.messages.edit.user.success')}`, {
+        type: 'success',
+      });
+    },
+    onError: () => {
+      alert.show(`${t('common.messages.edit.user.error')}`, {
+        type: 'error',
+      });
     },
   });
 };

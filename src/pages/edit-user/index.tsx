@@ -1,23 +1,18 @@
 import * as React from 'react';
-import { GraphqlLoadingCounter } from '@/hocs/graphql-loading-counter';
 import { useTranslation } from 'react-i18next';
-import { IUser } from '@/helpers/api-models';
-import { UIButtonComponent } from '@/components/button';
-import { useParams } from 'react-router';
-import { useGetUserById } from '@/queries/use-get-user-by-id';
-import styled from 'styled-components';
-import { UIInputComponent } from '@/components/input';
 import { useForm } from 'react-hook-form';
+import { useParams, useHistory } from 'react-router';
+import styled from 'styled-components';
+import { UIButtonComponent } from '@/components/button';
+import { useGetUserById } from '@/queries/use-get-user-by-id';
+import { UIInputComponent } from '@/components/input';
 import { useUpdateUserMutation } from '@/queries/mutations/use-update-user';
+import { UIContainerComponent } from '@/components/container';
 
 interface RouteParams {
   userId: string;
 }
 
-const PageWrapper = styled.div`
-  width: 75%;
-  margin: auto;
-`;
 const HeaderWrapper = styled.div`
   width: 100%;
   color: #fff;
@@ -36,31 +31,28 @@ const FormWrapper = styled.div`
   justify-content: flex-start;
 `;
 const FormItemWrapper = styled.div`
-  width: -moz-calc(50% - 32px);
-  width: -webkit-calc(50% - 32px);
-  width: calc(50% - 32px);
+  width: 100%;
   float: left;
-  margin-right: 16px;
+  margin-bottom: 1rem;
 `;
 
 function EditUserPage() {
   /* EditUserPage Variables */
   const { t } = useTranslation();
   const { userId } = useParams<RouteParams>();
+  const routerHistory = useHistory();
   const {
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-    getValues,
-    control,
   } = useForm();
   const { loading, error, data } = useGetUserById(parseInt(userId, 10));
-  const [updateUser] = useUpdateUserMutation();
+  const { mutate: updateUser, mutateLoading, mutateError } = useUpdateUserMutation();
+
   /* EditUserPage Callbacks */
   const onSubmit = React.useCallback(
     (s: any) => {
-      console.log(s);
       updateUser({
         variables: {
           id: parseInt(userId, 10),
@@ -70,102 +62,106 @@ function EditUserPage() {
           birthDate: new Date(),
           email: s.email,
         },
+      }).then(() => {
+        routerHistory.push('/');
       });
     },
-    [updateUser, userId],
+    [updateUser, routerHistory, userId],
   );
   /* EditUserPage Lifecycle  */
 
   return (
     <>
-      {!loading && !error && (
-        <PageWrapper>
-          <HeaderWrapper>
-            <h2>{t('common.user_details')}</h2>
-          </HeaderWrapper>
-          <FormWrapper>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <FormItemWrapper>
-                <UIInputComponent
-                  labelKey="Name"
-                  type="text"
-                  name="name"
-                  defaultValue={data.users_by_pk.name}
-                  {...register('name', {
-                    required: 'Bu Alan Zorunludur.',
-                  })}
-                  onChange={e => {
-                    setValue('name', e.target.value);
-                  }}
-                  errorKey={errors.name?.message}
-                />
-              </FormItemWrapper>
-              <FormItemWrapper>
-                <UIInputComponent
-                  labelKey="Lastname"
-                  type="text"
-                  name="lastname"
-                  defaultValue={data.users_by_pk.lastname}
-                  {...register('lastname', {
-                    required: 'Bu Alan Zorunludur.',
-                  })}
-                  onChange={e => {
-                    setValue('lastname', e.target.value);
-                  }}
-                  errorKey={errors.lastname?.message}
-                />
-              </FormItemWrapper>
-              <FormItemWrapper>
-                <UIInputComponent
-                  labelKey="Email"
-                  type="text"
-                  name="email"
-                  defaultValue={data.users_by_pk.email}
-                  {...register('email', {
-                    required: 'Bu Alan Zorunludur.',
-                  })}
-                  onChange={e => {
-                    setValue('email', e.target.value);
-                  }}
-                  errorKey={errors.email?.message}
-                />
-              </FormItemWrapper>
-              <FormItemWrapper>
-                <UIInputComponent
-                  labelKey="Phone"
-                  type="text"
-                  name="phone"
-                  defaultValue={data.users_by_pk.phone}
-                  {...register('phone', {
-                    required: 'Bu Alan Zorunludur.',
-                  })}
-                  onChange={e => {
-                    setValue('phone', e.target.value);
-                  }}
-                  errorKey={errors.phone?.message}
-                />
-              </FormItemWrapper>
-              <FormItemWrapper>
-                <UIInputComponent
-                  labelKey="Date of Birth"
-                  type="text"
-                  name="date_of_birth"
-                  defaultValue={data.users_by_pk.date_of_birth}
-                  {...register('date_of_birth', {
-                    required: 'Bu Alan Zorunludur.',
-                  })}
-                  onChange={e => {
-                    setValue('date_of_birth', e.target.value);
-                  }}
-                  errorKey={errors.date_of_birth?.message}
-                />
-              </FormItemWrapper>
-              <FormItemWrapper>
-                <UIButtonComponent type="submit">Onayla</UIButtonComponent>
-              </FormItemWrapper>
-            </form>
-          </FormWrapper>
-        </PageWrapper>
+      {!loading && !error && !mutateLoading && !mutateError && (
+        <UIContainerComponent>
+          <>
+            <HeaderWrapper>
+              <h2>{t('common.user_details')}</h2>
+            </HeaderWrapper>
+            <FormWrapper>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <FormItemWrapper>
+                  <UIInputComponent
+                    labelKey={t('common.name')}
+                    type="text"
+                    name="name"
+                    defaultValue={data.users_by_pk.name}
+                    {...register('name', {
+                      required: t('common.warnings.required').toString(),
+                    })}
+                    onChange={e => {
+                      setValue('name', e.target.value);
+                    }}
+                    errorKey={errors.name?.message}
+                  />
+                </FormItemWrapper>
+                <FormItemWrapper>
+                  <UIInputComponent
+                    labelKey={t('common.lastname')}
+                    type="text"
+                    name="lastname"
+                    defaultValue={data.users_by_pk.lastname}
+                    {...register('lastname', {
+                      required: t('common.warnings.required').toString(),
+                    })}
+                    onChange={e => {
+                      setValue('lastname', e.target.value);
+                    }}
+                    errorKey={errors.lastname?.message}
+                  />
+                </FormItemWrapper>
+                <FormItemWrapper>
+                  <UIInputComponent
+                    labelKey={t('common.email')}
+                    type="text"
+                    name="email"
+                    defaultValue={data.users_by_pk.email}
+                    {...register('email', {
+                      required: t('common.warnings.required').toString(),
+                    })}
+                    onChange={e => {
+                      setValue('email', e.target.value);
+                    }}
+                    errorKey={errors.email?.message}
+                  />
+                </FormItemWrapper>
+                <FormItemWrapper>
+                  <UIInputComponent
+                    labelKey={t('common.phone')}
+                    type="text"
+                    name="phone"
+                    defaultValue={data.users_by_pk.phone}
+                    {...register('phone', {
+                      required: t('common.warnings.required').toString(),
+                    })}
+                    onChange={e => {
+                      setValue('phone', e.target.value);
+                    }}
+                    errorKey={errors.phone?.message}
+                  />
+                </FormItemWrapper>
+                <FormItemWrapper>
+                  <UIInputComponent
+                    labelKey={t('common.date_of_birth')}
+                    type="text"
+                    name="date_of_birth"
+                    defaultValue={data.users_by_pk.date_of_birth}
+                    {...register('date_of_birth', {
+                      required: t('common.warnings.required').toString(),
+                    })}
+                    onChange={e => {
+                      setValue('date_of_birth', e.target.value);
+                    }}
+                    errorKey={errors.date_of_birth?.message}
+                  />
+                </FormItemWrapper>
+                <FormItemWrapper>
+                  <UIButtonComponent type="submit">{t('common.form.submit')}</UIButtonComponent>
+                </FormItemWrapper>
+              </form>
+            </FormWrapper>
+          </>
+        </UIContainerComponent>
       )}
     </>
   );

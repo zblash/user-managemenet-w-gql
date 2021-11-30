@@ -1,4 +1,5 @@
 {
+  "common.warnings.required": "This field is required.",
   "common.id": "ID",
   "common.name": "Name",
   "common.lastname": "Lastname",
@@ -7,5 +8,9 @@
   "common.transactions": "Transactions",
   "common.details": "Details",
   "common.date_of_birth": "Date of Birth",
-  "common.user_details": "User Details"
+  "common.user_details": "User Details",
+  "common.form.submit": "Submit",
+
+  "common.messages.edit.user.success": "User has been updated as successful.",
+  "common.messages.edit.user.error": "Error occurred while updating user"
 }

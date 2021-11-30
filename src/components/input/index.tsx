@@ -2,10 +2,19 @@ import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 
 const StyledInput = styled.input`
-  width: 100%;
-  padding: 10px;
+  width: calc(100% - 6px);
+  padding: 12px 0 12px 6px;
   border: 1px solid #ddd;
   border-radius: 4px;
+`;
+
+const StyledLabel = styled.label`
+  display: inline-block;
+  margin-bottom: 0.5 rem;
+`;
+
+const StyledWrapper = styled.div`
+  margin-bottom: 1 rem;
 `;
 
 export interface UIInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -19,8 +28,8 @@ export interface UIInputProps extends InputHTMLAttributes<HTMLInputElement> {
 const UIInputComponent = React.forwardRef<HTMLInputElement, UIInputProps>(
   ({ labelKey, name, errorKey, placeholderKey, type = 'text', ...rest }, ref) => {
     return (
-      <div>
-        {labelKey && <label htmlFor={name}>{labelKey}</label>}
+      <StyledWrapper>
+        {labelKey && <StyledLabel htmlFor={name}>{labelKey}</StyledLabel>}
         <StyledInput
           id={name}
           name={name}
@@ -37,7 +46,7 @@ const UIInputComponent = React.forwardRef<HTMLInputElement, UIInputProps>(
             {errorKey}
           </div>
         )}
-      </div>
+      </StyledWrapper>
     );
   },
 );

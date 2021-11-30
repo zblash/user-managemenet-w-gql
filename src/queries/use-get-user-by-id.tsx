@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client';
-import { GraphqlLoadingCounter } from '@/hocs/graphql-loading-counter';
-import { useGraphql } from '@/hocs/useGraphql';
+import { useGraphqlQuery } from '@/hocs/useGraphql';
 import { USER_FRAGMENT } from '@/helpers/api-fragments';
 
 const userByIdQuery = gql`
@@ -13,7 +12,7 @@ const userByIdQuery = gql`
 `;
 
 export const useGetUserById = (id: number) => {
-  return useGraphql(userByIdQuery, {
+  return useGraphqlQuery(userByIdQuery, {
     variables: { id },
   });
 };

@@ -1,4 +1,5 @@
 {
+  "common.warnings.required": "Bu Alan Zorunludur.",
   "common.id": "ID",
   "common.name": "Ad",
   "common.lastname": "Soyad",
@@ -7,5 +8,9 @@
   "common.transactions": "Islemler",
   "common.details": "Detaylar",
   "common.date_of_birth": "Dogum Tarihi",
-  "common.user_details": "Kullanici Detaylari"
+  "common.user_details": "Kullanici Detaylari",
+  "common.form.submit": "Onayla",
+
+  "common.messages.edit.user.success": "Kullanici basarili sekilde guncellendi.",
+  "common.messages.edit.user.error": "Kullanici guncellenirken hata olustu."
 }
