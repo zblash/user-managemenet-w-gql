@@ -8,6 +8,7 @@ import { useGetUserById } from '@/queries/use-get-user-by-id';
 import { UIInputComponent } from '@/components/input';
 import { useUpdateUserMutation } from '@/queries/mutations/use-update-user';
 import { UIContainerComponent } from '@/components/container';
+import { COLORS } from '@/helpers/constants';
 
 interface RouteParams {
   userId: string;
@@ -16,14 +17,14 @@ interface RouteParams {
 const HeaderWrapper = styled.div`
   width: 100%;
   color: #fff;
-  background-color: #36304a;
+  background-color: ${COLORS.primary};
   padding: 16px;
-  border: 1px solid #36304a;
+  border: 1px solid ${COLORS.primary};
   border-radius: 10px 10px 0 0;
 `;
 const FormWrapper = styled.div`
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid ${COLORS.gray};
   padding: 16px;
   border-top: 0;
   border-radius: 0 0 10px 10px;

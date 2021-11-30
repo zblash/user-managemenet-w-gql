@@ -1,21 +1,22 @@
 import React from 'react';
 import { useTable } from 'react-table';
 import styled from 'styled-components';
+import { COLORS } from '@/helpers/constants';
 
 const StyledTable = styled.table`
   text-align: left;
   line-height: 40px;
   border-collapse: separate;
   border-spacing: 0;
-  border: 2px solid #36304a;
+  border: 2px solid ${COLORS.primary};
   width: 100%;
   margin: 50px auto;
   border-radius: 0.25rem;
 
   thead {
     tr {
-      background: #36304a;
-      color: #fff;
+      background: ${COLORS.primary};
+      color: ${COLORS.white};
       border: none;
     }
   }
@@ -23,10 +24,10 @@ const StyledTable = styled.table`
   tbody {
     tr {
       td {
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid ${COLORS.gray};
       }
       &:hover {
-        background-color: #f2f2f2;
+        background-color: ${COLORS.lightGray};
         cursor: default;
       }
       &:last-child {

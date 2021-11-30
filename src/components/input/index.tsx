@@ -1,10 +1,11 @@
 import React, { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
+import { COLORS } from '@/helpers/constants';
 
 const StyledInput = styled.input`
   width: calc(100% - 6px);
   padding: 12px 0 12px 6px;
-  border: 1px solid #ddd;
+  border: 1px solid ${COLORS.gray};
   border-radius: 4px;
 `;
 

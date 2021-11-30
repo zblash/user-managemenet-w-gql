@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { COLORS } from '@/helpers/constants';
 
 const StyledWrapper = styled.div`
   width: 100%;
   min-height: 100%;
   position: absolute;
   z-index: 999;
-  background: #fff;
+  background: ${COLORS.white};
   display: flex;
 `;
 
@@ -17,7 +18,7 @@ const StyledSpinner = styled.svg`
   height: 75px;
 
   & .path {
-    stroke: #5652bf;
+    stroke: ${COLORS.primary};
     stroke-linecap: round;
     animation: dash 1.5s ease-in-out infinite;
   }

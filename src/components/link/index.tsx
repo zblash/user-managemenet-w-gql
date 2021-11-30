@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { COLORS } from '@/helpers/constants';
 
 interface UILinkProps {
   to: string;
@@ -11,24 +12,24 @@ interface UILinkProps {
 }
 
 const StyledButtonNavLink = styled(NavLink)`
-  background-color: #36304a;
-  border: 1px solid #36304a;
-  color: #fff;
+  background-color: ${COLORS.primary};
+  border: 1px solid ${COLORS.primary};
+  color: ${COLORS.white};
   padding: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
 
   &:hover {
-    background-color: #140e2b;
+    background-color: ${COLORS.secondary};
   }
 `;
 
 const StyledLinkNavLink = styled(NavLink)`
-  color: #36304a;
+  color: ${COLORS.primary};
   text-decoration: none;
   &:hover {
-    color: #140e2b;
+    color: ${COLORS.secondary};
   }
 `;
 
