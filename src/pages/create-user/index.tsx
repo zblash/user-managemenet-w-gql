@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useHistory } from 'react-router';
+import DatePicker from 'react-datepicker';
 import styled from 'styled-components';
 import { UIButtonComponent } from '@/components/button';
 import { UIInputComponent } from '@/components/input';
@@ -43,6 +44,7 @@ function CreateUserPage() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     setValue,
   } = useForm();
@@ -135,17 +137,28 @@ function CreateUserPage() {
                   />
                 </FormItemWrapper>
                 <FormItemWrapper>
-                  <UIInputComponent
-                    labelKey={t('common.date_of_birth')}
-                    type="text"
+                  <Controller
+                    control={control}
                     name="date_of_birth"
-                    {...register('date_of_birth', {
-                      required: t('common.warnings.required').toString(),
-                    })}
-                    onChange={e => {
-                      setValue('date_of_birth', e.target.value);
-                    }}
-                    errorKey={errors.date_of_birth?.message}
+                    rules={{ required: t('common.warnings.required').toString() }}
+                    defaultValue={new Date()}
+                    render={({ field: { onChange, value, ref } }) => (
+                      <DatePicker
+                        selected={value}
+                        onChange={onChange}
+                        customInput={
+                          <UIInputComponent
+                            labelKey={t('common.date_of_birth')}
+                            type="text"
+                            name="date_of_birth"
+                            onChange={e => {
+                              setValue('date_of_birth', e.target.value);
+                            }}
+                            errorKey={errors.date_of_birth?.message}
+                          />
+                        }
+                      />
+                    )}
                   />
                 </FormItemWrapper>
                 <FormItemWrapper>

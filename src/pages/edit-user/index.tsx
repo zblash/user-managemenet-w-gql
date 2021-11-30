@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { useParams, useHistory } from 'react-router';
 import styled from 'styled-components';
+import DatePicker from 'react-datepicker';
 import { UIButtonComponent } from '@/components/button';
 import { useGetUserById } from '@/queries/use-get-user-by-id';
 import { UIInputComponent } from '@/components/input';
@@ -42,9 +43,11 @@ function EditUserPage() {
   const { t } = useTranslation();
   const { userId } = useParams<RouteParams>();
   const routerHistory = useHistory();
+
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     setValue,
   } = useForm();
@@ -60,7 +63,7 @@ function EditUserPage() {
           name: s.name,
           lastname: s.lastname,
           phone: s.phone,
-          birthDate: new Date(),
+          birthDate: s.date_of_birth,
           email: s.email,
         },
       }).then(() => {
@@ -142,18 +145,28 @@ function EditUserPage() {
                   />
                 </FormItemWrapper>
                 <FormItemWrapper>
-                  <UIInputComponent
-                    labelKey={t('common.date_of_birth')}
-                    type="text"
+                  <Controller
+                    control={control}
                     name="date_of_birth"
-                    defaultValue={data.users_by_pk.date_of_birth}
-                    {...register('date_of_birth', {
-                      required: t('common.warnings.required').toString(),
-                    })}
-                    onChange={e => {
-                      setValue('date_of_birth', e.target.value);
-                    }}
-                    errorKey={errors.date_of_birth?.message}
+                    rules={{ required: t('common.warnings.required').toString() }}
+                    defaultValue={Date.parse(data.users_by_pk.date_of_birth)}
+                    render={({ field: { onChange, value, ref } }) => (
+                      <DatePicker
+                        selected={value}
+                        onChange={onChange}
+                        customInput={
+                          <UIInputComponent
+                            labelKey={t('common.date_of_birth')}
+                            type="text"
+                            name="date_of_birth"
+                            onChange={e => {
+                              setValue('date_of_birth', e.target.value);
+                            }}
+                            errorKey={errors.date_of_birth?.message}
+                          />
+                        }
+                      />
+                    )}
                   />
                 </FormItemWrapper>
                 <FormItemWrapper>
