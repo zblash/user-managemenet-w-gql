@@ -24,7 +24,6 @@ export const useGraphqlQuery = (query: DocumentNode, options?: QueryHookOptions)
   const loading = useLoadingContext();
   const client = useApolloClient();
   React.useEffect(() => {
-    GraphqlLoadingCounter.incrementCount();
     const cachedQuery = client.readQuery({
       query,
       ...options,
@@ -32,6 +31,7 @@ export const useGraphqlQuery = (query: DocumentNode, options?: QueryHookOptions)
 
     if (cachedQuery === null) {
       loading.show();
+      GraphqlLoadingCounter.incrementCount();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
