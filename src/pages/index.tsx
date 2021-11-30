@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { UILoaderComponent } from '@/components/loading';
+import { UIHeaderComponent } from '@/components/header';
 
 const HomePage = React.lazy(() => import('./home').then(module => ({ default: module.HomePage })));
 const EditUserPage = React.lazy(() => import('./edit-user').then(module => ({ default: module.EditUserPage })));
@@ -23,6 +24,7 @@ export const RoutesList: IRoute[] = [
 const Routes = React.memo(() => {
   return (
     <>
+      <UIHeaderComponent />
       <div style={{ minHeight: '100%' }}>
         <React.Suspense fallback={<UILoaderComponent />}>
           <Switch>

@@ -76,7 +76,7 @@ function CreateUserPage() {
         <UIContainerComponent>
           <>
             <HeaderWrapper>
-              <h2>{t('common.user_details')}</h2>
+              <h2>{t('common.create-user')}</h2>
             </HeaderWrapper>
             <FormWrapper>
               <form onSubmit={handleSubmit(onSubmit)}>

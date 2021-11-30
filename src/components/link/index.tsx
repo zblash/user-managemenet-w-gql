@@ -26,10 +26,10 @@ const StyledButtonNavLink = styled(NavLink)`
 `;
 
 const StyledLinkNavLink = styled(NavLink)`
-  color: ${COLORS.primary};
+  color: ${COLORS.white};
   text-decoration: none;
   &:hover {
-    color: ${COLORS.secondary};
+    text-decoration: underline;
   }
 `;
 
