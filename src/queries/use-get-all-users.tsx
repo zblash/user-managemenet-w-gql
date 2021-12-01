@@ -1,15 +1,5 @@
-import { gql } from '@apollo/client';
 import { useGraphqlQuery } from '@/hocs/useGraphql';
-import { USER_FRAGMENT } from '@/helpers/api-fragments';
-
-const usersQuery = gql`
-  ${USER_FRAGMENT}
-  query usersQuery {
-    users {
-      ...UserFields
-    }
-  }
-`;
+import { usersQuery } from '@/helpers/api-fragments';
 
 export const useGetAllUsers = () => {
   return useGraphqlQuery(usersQuery);

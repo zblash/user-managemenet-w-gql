@@ -1,28 +1,14 @@
-import { gql } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useGraphqlMutation } from '@/hocs/useGraphql';
 import { useAlert } from '@/hocs/use-alert';
-
-const createUserMutation = gql`
-  mutation createUserMutation($birthDate: date!, $email: String!, $lastname: String!, $name: String!, $phone: String!) {
-    insert_users_one(
-      object: { name: $name, lastname: $lastname, phone: $phone, date_of_birth: $birthDate, email: $email }
-    ) {
-      date_of_birth
-      email
-      id
-      lastname
-      name
-      phone
-    }
-  }
-`;
+import { createUserMutation, usersQuery } from '@/helpers/api-fragments';
 
 export const useCreateUserMutation = () => {
   const alert = useAlert();
   const { t } = useTranslation();
 
   return useGraphqlMutation(createUserMutation, {
+    refetchQueries: [{ query: usersQuery }],
     onCompleted: () => {
       alert.show(`${t('common.messages.create.user.success')}`, {
         type: 'success',

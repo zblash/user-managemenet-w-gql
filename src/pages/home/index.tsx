@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import styled from 'styled-components';
 import { useGetAllUsers } from '@/queries/use-get-all-users';
 import { UITableComponent } from '@/components/table';
 import { IUser } from '@/helpers/api-models';
@@ -7,6 +8,11 @@ import { UILink } from '@/components/link';
 import { UIContainerComponent } from '@/components/container';
 import { useDeleteUserMutation } from '@/queries/mutations/use-delete-user';
 import { UIButtonComponent } from '@/components/button';
+
+const StyledButtonWrapper = styled.div`
+  margin-left: 8px;
+  float: left:
+`;
 
 function HomePage() {
   /* HomePage Variables */
@@ -61,17 +67,21 @@ function HomePage() {
               accessor: 'transactions',
               customRenderer: (item: IUser) => (
                 <>
-                  <UILink type="button" to={`/edit-user/${item.id}`}>
-                    {t('common.details')}
-                  </UILink>
-                  <UIButtonComponent
-                    type="button"
-                    onClick={() => {
-                      onDeleteUser(item.id);
-                    }}
-                  >
-                    {t('common.delete-user')}
-                  </UIButtonComponent>
+                  <StyledButtonWrapper>
+                    <UILink type="button" to={`/edit-user/${item.id}`}>
+                      {t('common.details')}
+                    </UILink>
+                  </StyledButtonWrapper>
+                  <StyledButtonWrapper>
+                    <UIButtonComponent
+                      type="button"
+                      onClick={() => {
+                        onDeleteUser(item.id);
+                      }}
+                    >
+                      {t('common.delete-user')}
+                    </UIButtonComponent>
+                  </StyledButtonWrapper>
                 </>
               ),
             },

@@ -1,7 +1,7 @@
 {
   "common.home": "Anasayfa",
   "common.create-user": "Yeni Kullanici",
-  "common.delete-user": "Kaldir",
+  "common.delete-user": "Kullaniciyi Kaldir",
   "common.warnings.required": "Bu Alan Zorunludur.",
   "common.id": "ID",
   "common.name": "Ad",
