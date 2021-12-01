@@ -10,6 +10,7 @@ import { UIInputComponent } from '@/components/input';
 import { useUpdateUserMutation } from '@/queries/mutations/use-update-user';
 import { UIContainerComponent } from '@/components/container';
 import { COLORS } from '@/helpers/constants';
+import { dateObjectToBackendDateFormat } from '@/helpers/date-helper';
 
 interface RouteParams {
   userId: string;
@@ -63,7 +64,7 @@ function EditUserPage() {
           name: s.name,
           lastname: s.lastname,
           phone: s.phone,
-          birthDate: s.date_of_birth,
+          birthDate: dateObjectToBackendDateFormat(s.date_of_birth),
           email: s.email,
         },
       }).then(() => {

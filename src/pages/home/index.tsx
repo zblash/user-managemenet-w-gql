@@ -5,18 +5,31 @@ import { UITableComponent } from '@/components/table';
 import { IUser } from '@/helpers/api-models';
 import { UILink } from '@/components/link';
 import { UIContainerComponent } from '@/components/container';
+import { useDeleteUserMutation } from '@/queries/mutations/use-delete-user';
+import { UIButtonComponent } from '@/components/button';
 
 function HomePage() {
   /* HomePage Variables */
   const { t } = useTranslation();
   const { loading, error, data } = useGetAllUsers();
+  const { mutate: deleteUser, mutateLoading, mutateError } = useDeleteUserMutation();
   /* HomePage Callbacks */
 
+  const onDeleteUser = React.useCallback(
+    (id: number) => {
+      deleteUser({
+        variables: {
+          id,
+        },
+      });
+    },
+    [deleteUser],
+  );
   /* HomePage Lifecycle  */
 
   return (
     <UIContainerComponent>
-      {!loading && !error && (
+      {!loading && !error && !mutateLoading && !mutateError && (
         <UITableComponent
           columns={[
             {
@@ -47,9 +60,19 @@ function HomePage() {
               Header: '',
               accessor: 'transactions',
               customRenderer: (item: IUser) => (
-                <UILink type="button" to={`/edit-user/${item.id}`}>
-                  {t('common.details')}
-                </UILink>
+                <>
+                  <UILink type="button" to={`/edit-user/${item.id}`}>
+                    {t('common.details')}
+                  </UILink>
+                  <UIButtonComponent
+                    type="button"
+                    onClick={() => {
+                      onDeleteUser(item.id);
+                    }}
+                  >
+                    {t('common.delete-user')}
+                  </UIButtonComponent>
+                </>
               ),
             },
           ]}

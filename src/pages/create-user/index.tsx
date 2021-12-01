@@ -9,6 +9,7 @@ import { UIInputComponent } from '@/components/input';
 import { UIContainerComponent } from '@/components/container';
 import { COLORS } from '@/helpers/constants';
 import { useCreateUserMutation } from '@/queries/mutations/use-create-user';
+import { dateObjectToBackendDateFormat } from '@/helpers/date-helper';
 
 interface RouteParams {
   userId: string;
@@ -59,7 +60,7 @@ function CreateUserPage() {
           name: s.name,
           lastname: s.lastname,
           phone: s.phone,
-          birthDate: new Date(),
+          birthDate: dateObjectToBackendDateFormat(s.date_of_birth),
           email: s.email,
         },
       }).then(() => {

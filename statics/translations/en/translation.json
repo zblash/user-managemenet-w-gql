@@ -1,6 +1,7 @@
 {
-  "common.home": "Anasayfa",
-  "common.create-user": "Yeni Kullanici",
+  "common.home": "Home",
+  "common.create-user": "Create User",
+  "common.delete-user": "Remove",
   "common.warnings.required": "This field is required.",
   "common.id": "ID",
   "common.name": "Name",
@@ -17,5 +18,8 @@
   "common.messages.edit.user.error": "Error occurred while updating user",
 
   "common.messages.create.user.success": "New user created successfully.",
-  "common.messages.create.user.error": "Error occurred while creating user."
+  "common.messages.create.user.error": "Error occurred while creating user.",
+
+  "common.messages.remove.user.success": "User removed successfully.",
+  "common.messages.remove.user.error": "Error occurred while removing user."
 }

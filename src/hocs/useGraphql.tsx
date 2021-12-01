@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import * as React from 'react';
 import {
   useQuery,
@@ -57,13 +58,11 @@ export const useGraphqlMutation = (mutation: DocumentNode, options?: MutationHoo
     },
   });
   React.useEffect(() => {
-    if (mutateLoading !== undefined) {
-      if (mutateLoading) {
-        GraphqlLoadingCounter.incrementCount();
-        loading.show();
-      }
+    if (mutateLoading && isMutationCalled) {
+      GraphqlLoadingCounter.incrementCount();
+      loading.show();
     }
-  }, [loading, mutateLoading]);
+  }, [isMutationCalled, mutateLoading]);
 
   return { mutate, mutateLoading, mutateData, mutateError, isMutationCalled };
 };

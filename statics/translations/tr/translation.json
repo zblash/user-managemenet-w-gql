@@ -1,6 +1,7 @@
 {
   "common.home": "Anasayfa",
   "common.create-user": "Yeni Kullanici",
+  "common.delete-user": "Kaldir",
   "common.warnings.required": "Bu Alan Zorunludur.",
   "common.id": "ID",
   "common.name": "Ad",
@@ -17,5 +18,8 @@
   "common.messages.edit.user.error": "Kullanici guncellenirken hata olustu.",
 
   "common.messages.create.user.success": "Kullanici basarili sekilde olusturuldu.",
-  "common.messages.create.user.error": "Kullanici olusturulurken hata olustu."
+  "common.messages.create.user.error": "Kullanici olusturulurken hata olustu.",
+
+  "common.messages.remove.user.success": "Kullanici basarili sekilde kaldirildi.",
+  "common.messages.remove.user.error": "Kullanici kaldirilirken hata olustu."
 }
